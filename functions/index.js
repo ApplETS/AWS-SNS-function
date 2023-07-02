@@ -15,6 +15,5 @@ const logger = require("firebase-functions/logger");
 
 exports.createOrUpdateEndpoint = onRequest((request, response) => {
   logger.info("Hello logs!", {structuredData: true});
-  response.send(`Hello ${process.env.AWS_SECRET_KEY}, 
-    ${process.env.AWS_ACCESS_KEY}  and ${process.env.AWS_PLATFORM_ARN}`);
+  response.send(`Hello with keys`);
 });
