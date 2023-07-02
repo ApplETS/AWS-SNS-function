@@ -35,3 +35,10 @@ Then, deploy the function and enjoy :smile:
 ```bash
 firebase deploy
 ```
+
+## Testing
+To test simply launch the function locally using the firebase tools.
+
+```bash
+firebase emulators:start
+```

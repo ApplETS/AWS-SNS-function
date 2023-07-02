@@ -13,7 +13,8 @@ const logger = require("firebase-functions/logger");
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
 
-exports.helloWorld = onRequest((request, response) => {
+exports.createOrUpdateEndpoint = onRequest((request, response) => {
   logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!");
+  response.send(`Hello ${process.env.AWS_SECRET_KEY}, 
+    ${process.env.AWS_ACCESS_KEY}  and ${process.env.AWS_PLATFORM_ARN}`);
 });
