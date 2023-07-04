@@ -29,11 +29,15 @@ jobs:
           echo "AWS_SECRET_KEY=$AWS_SECRET_KEY" >> ./functions/.env
           echo "AWS_ACCESS_KEY=$AWS_ACCESS_KEY" >> ./functions/.env
           echo "AWS_PLATFORM_ARN=$AWS_PLATFORM_ARN" >> ./functions/.env
-      
-      - run: echo "$FIREBASE_TOKEN"
+        env:
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_PLATFORM_ARN: ${{ secrets.AWS_PLATFORM_ARN }}
       
       - name: Deploy Firebase Functions
         run: |
           cd ./functions
           npm install -g firebase-tools
           firebase deploy --token "$FIREBASE_TOKEN"
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
