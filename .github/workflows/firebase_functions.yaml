@@ -20,8 +20,8 @@ jobs:
         run: npm ci
         working-directory: ./functions
         
-      - name: Build
-        run: npm run build
+      - name: Lint
+        run: npm run lint
         working-directory: ./functions
 
       - name: Create .env file
@@ -35,4 +35,4 @@ jobs:
           cd ./functions
           npm install -g firebase-tools
           firebase login:ci --no-localhost --token "$FIREBASE_TOKEN"
-          firebase deploy --only functions
+          npm run deploy
