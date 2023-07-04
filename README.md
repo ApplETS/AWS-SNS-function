@@ -4,7 +4,7 @@ A simple Firebase function to register mobile phone devices to AWS SNS. Act as a
 
 ## Prerequisites
 
-- Node.js 12.x
+- Node.js ^16.x
 - AWS account
 - Firebase project
 - Firebase CLI `npm install -g firebase-tools`
