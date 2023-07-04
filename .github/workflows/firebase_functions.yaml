@@ -33,6 +33,7 @@ jobs:
       - name: Deploy Firebase Functions
         run: |
           cd ./functions
+          npm config set unsafe-perm true
           npm install -g firebase-tools
           firebase login:ci --no-localhost --token "$FIREBASE_TOKEN"
           npm run deploy
