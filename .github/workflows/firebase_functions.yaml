@@ -34,5 +34,5 @@ jobs:
         run: |
           cd ./functions
           npm install -g firebase-tools
-          firebase login:ci --no-localhost --token "$FIREBASE_TOKEN"
+          firebase login --no-localhost --token "$FIREBASE_TOKEN"
           npm run deploy
