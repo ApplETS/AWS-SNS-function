@@ -68,6 +68,3 @@ exports.setEndpointAttributes = onRequest(async (request, response) => {
   });
   response.send(await client.send(command));
 });
-
-
-// https://docs.aws.amazon.com/sns/latest/dg/mobile-platform-endpoint.html
