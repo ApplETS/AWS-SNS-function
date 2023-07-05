@@ -28,7 +28,7 @@ exports.createPlatformEndpoint = onRequest(async (request, response) => {
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_KEY}});
   const command = new CreatePlatformEndpointCommand({
-    PlatformApplicationArn: process.env.PLATFORM_APPLICATION_ARN,
+    PlatformApplicationArn: process.env.AWS_PLATFORM_ARN,
     Token: token,
   });
   response.send(await client.send(command));
