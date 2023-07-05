@@ -23,51 +23,69 @@ const {
 exports.createPlatformEndpoint = onRequest(
     async (request, response) => {
       logger.info("[createPlatformEndpoint]", {structuredData: true});
-      const region = request.query.region;
-      const token = request.query.token;
-      const client = new SNSClient({region: region, credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY}});
-      const command = new CreatePlatformEndpointCommand({
-        PlatformApplicationArn: process.env.AWS_PLATFORM_ARN,
-        Token: token,
-      });
-      response.send(await client.send(command));
+      try {
+        const client = new SNSClient({
+          region: request.query.region,
+          credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY,
+            secretAccessKey: process.env.AWS_SECRET_KEY,
+          },
+        });
+        const command = new CreatePlatformEndpointCommand({
+          PlatformApplicationArn: process.env.AWS_PLATFORM_ARN,
+          Token: request.query.token,
+        });
+        response.send(await client.send(command));
+      } catch (e) {
+        logger.error(e.message);
+        response.status(500).send(e.message);
+      }
     });
 
 
 exports.getEndpointAttributes = onRequest(
     async (request, response) => {
       logger.info("[getEndpointAttributes]", {structuredData: true});
-
-      const region = request.query.region;
-      const endpointArn = request.query.endpointArn;
-      const client = new SNSClient({region: region, credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY}});
-      const command = new GetEndpointAttributesCommand({
-        EndpointArn: endpointArn,
-      });
-      response.send(await client.send(command));
+      try {
+        const client = new SNSClient({
+          region: request.query.region,
+          credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY,
+            secretAccessKey: process.env.AWS_SECRET_KEY,
+          },
+        });
+        const command = new GetEndpointAttributesCommand({
+          EndpointArn: request.query.endpointArn,
+        });
+        response.send(await client.send(command));
+      } catch (e) {
+        logger.error(e.message);
+        response.status(500).send(e.message);
+      }
     });
 
 
 exports.setEndpointAttributes = onRequest(
     async (request, response) => {
       logger.info("[setEndpointAttributes]", {structuredData: true});
-
-      const region = request.query.region;
-      const endpointArn = request.query.endpointArn;
-      const client = new SNSClient({region: region, credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY}});
-
-      const command = new SetEndpointAttributesCommand({
-        EndpointArn: endpointArn,
-        Attributes: {
-          Token: request.query.token,
-          Enabled: "true",
-        },
-      });
-      response.send(await client.send(command));
+      try {
+        const client = new SNSClient({
+          region: request.query.region,
+          credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY,
+            secretAccessKey: process.env.AWS_SECRET_KEY,
+          },
+        });
+        const command = new SetEndpointAttributesCommand({
+          EndpointArn: request.query.endpointArn,
+          Attributes: {
+            Token: request.query.token,
+            Enabled: "true",
+          },
+        });
+        response.send(await client.send(command));
+      } catch (e) {
+        logger.error(e.message);
+        response.status(500).send(e.message);
+      }
     });
