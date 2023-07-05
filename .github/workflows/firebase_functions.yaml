@@ -24,15 +24,15 @@ jobs:
         run: npm run lint
         working-directory: ./functions
 
-      # - name: Create .env file
-      #   run: |
-      #     echo "AWS_SECRET_KEY=$AWS_SECRET_KEY" >> ./functions/.env
-      #     echo "AWS_ACCESS_KEY=$AWS_ACCESS_KEY" >> ./functions/.env
-      #     echo "AWS_PLATFORM_ARN=$AWS_PLATFORM_ARN" >> ./functions/.env
-      #   env:
-      #     AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-      #     AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
-      #     AWS_PLATFORM_ARN: ${{ secrets.AWS_PLATFORM_ARN }}
+      - name: Create .env file
+        run: |
+          echo "AWS_SECRET_KEY=$AWS_SECRET_KEY" >> ./functions/.env
+          echo "AWS_ACCESS_KEY=$AWS_ACCESS_KEY" >> ./functions/.env
+          echo "AWS_PLATFORM_ARN=$AWS_PLATFORM_ARN" >> ./functions/.env
+        env:
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_PLATFORM_ARN: ${{ secrets.AWS_PLATFORM_ARN }}
       
       - name: Deploy Firebase Functions
         run: |
