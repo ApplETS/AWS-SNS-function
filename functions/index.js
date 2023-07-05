@@ -21,7 +21,6 @@ const {
 // https://firebase.google.com/docs/functions/get-started
 
 exports.createPlatformEndpoint = onRequest(
-    {secrets: ["AWS_ACCESS_KEY", "AWS_SECRET_KEY", "AWS_PLATFORM_ARN"]},
     async (request, response) => {
       logger.info("[createPlatformEndpoint]", {structuredData: true});
       const region = request.query.region;
@@ -38,7 +37,6 @@ exports.createPlatformEndpoint = onRequest(
 
 
 exports.getEndpointAttributes = onRequest(
-    {secrets: ["AWS_ACCESS_KEY", "AWS_SECRET_KEY"]},
     async (request, response) => {
       logger.info("[getEndpointAttributes]", {structuredData: true});
 
@@ -55,7 +53,6 @@ exports.getEndpointAttributes = onRequest(
 
 
 exports.setEndpointAttributes = onRequest(
-    {secrets: ["AWS_ACCESS_KEY", "AWS_SECRET_KEY"]},
     async (request, response) => {
       logger.info("[setEndpointAttributes]", {structuredData: true});
 
