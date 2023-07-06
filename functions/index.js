@@ -16,7 +16,6 @@ const {
   SetEndpointAttributesCommand,
 } = require("@aws-sdk/client-sns");
 
-
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
 
@@ -34,6 +33,7 @@ exports.createPlatformEndpoint = onRequest(
         const command = new CreatePlatformEndpointCommand({
           PlatformApplicationArn: process.env.AWS_PLATFORM_ARN,
           Token: request.query.token,
+          CustomUserData: `ENS\\${request.query.universalCode}`,
         });
         response.send(await client.send(command));
       } catch (e) {
@@ -82,6 +82,7 @@ exports.setEndpointAttributes = onRequest(
             Token: request.query.token,
             Enabled: "true",
           },
+          CustomUserData: `ENS\\${request.query.universalCode}`,
         });
         response.send(await client.send(command));
       } catch (e) {
