@@ -14,6 +14,7 @@ const {
   CreatePlatformEndpointCommand,
   GetEndpointAttributesCommand,
   SetEndpointAttributesCommand,
+  DeleteEndpointCommand,
 } = require("@aws-sdk/client-sns");
 
 // Create and deploy your first functions
@@ -83,6 +84,28 @@ exports.setEndpointAttributes = onRequest(
             Enabled: "true",
           },
           CustomUserData: `ENS\\${request.query.universalCode}`,
+        });
+        response.send(await client.send(command));
+      } catch (e) {
+        logger.error(e.message);
+        response.status(500).send(e.message);
+      }
+    });
+
+
+exports.deleteEndpoint = onRequest(
+    async (request, response) => {
+      logger.info("[deleteEndpoint]", {structuredData: true});
+      try {
+        const client = new SNSClient({
+          region: request.query.region,
+          credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY,
+            secretAccessKey: process.env.AWS_SECRET_KEY,
+          },
+        });
+        const command = new DeleteEndpointCommand({
+          EndpointArn: request.query.endpointArn,
         });
         response.send(await client.send(command));
       } catch (e) {
