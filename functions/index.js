@@ -82,8 +82,8 @@ exports.setEndpointAttributes = onRequest(
           Attributes: {
             Token: request.query.token,
             Enabled: "true",
+            CustomUserData: `ENS\\${request.query.universalCode}`,
           },
-          CustomUserData: `ENS\\${request.query.universalCode}`,
         });
         response.send(await client.send(command));
       } catch (e) {
